@@ -1,9 +1,7 @@
-// src/api.js
+const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
 
 export async function chatWithAI(message) {
-  const API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
-
-  if (!API_KEY) {
+  if (!apiKey) {
     throw new Error("API key not found. Please check your .env file.");
   }
 
@@ -11,7 +9,7 @@ export async function chatWithAI(message) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${API_KEY}`,
+      Authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
       model: "gpt-3.5-turbo",
@@ -19,11 +17,8 @@ export async function chatWithAI(message) {
     }),
   });
 
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.error.message || "Something went wrong with AI request");
-  }
-
   const data = await response.json();
   return data.choices[0].message.content;
 }
+
+export default { chatWithAI };

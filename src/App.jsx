@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react"
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion"
 import { Sun, Moon, Copy, Image as ImageIcon, Mic, Volume2, Download } from "lucide-react"
 import { chatWithAI } from "./api"
