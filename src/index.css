@@ -1,8 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+<<<<<<< HEAD
 
 /* Optional: you can add your custom styles here */
 body {
   @apply bg-gray-100 text-gray-900;
 }
+=======
+>>>>>>> 59a520c11134bedcc2cc2a6d7489c97b6f6fd814
