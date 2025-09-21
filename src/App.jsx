@@ -1,9 +1,7 @@
-
 import { useState, useEffect, useRef } from "react"
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion"
 import { Sun, Moon, Copy, Image as ImageIcon, Mic, Volume2, Download } from "lucide-react"
-import { chatWithAI } from "./api"
 
 function App() {
   const [messages, setMessages] = useState([])
@@ -64,6 +62,18 @@ function App() {
   const copyMessage = (text) => {
     navigator.clipboard.writeText(text)
     alert("✅ Message copied!")
+  }
+
+  // ✅ Backend proxy function
+  const chatWithAI = async (message, image) => {
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message, image }),
+    })
+    const data = await res.json()
+    if (res.ok) return data.reply
+    throw new Error(data.error || "Something went wrong")
   }
 
   const sendMessage = async () => {
@@ -270,4 +280,3 @@ function App() {
 }
 
 export default App
-
